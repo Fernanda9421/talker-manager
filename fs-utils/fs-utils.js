@@ -5,4 +5,8 @@ const getTalkers = () => (
     .then((file) => JSON.parse(file))
 );
 
-module.exports = { getTalkers };
+const addTalker = (newTalker) => (
+  fs.writeFile('./talker.json', JSON.stringify(newTalker))
+);
+
+module.exports = { getTalkers, addTalker };
