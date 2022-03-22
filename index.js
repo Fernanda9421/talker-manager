@@ -18,6 +18,7 @@ const {
 const createTalker = require('./middlewares/createTalker');
 const editTalker = require('./middlewares/editTalker');
 const deleteTalker = require('./middlewares/deleteTalker');
+const searchTalker = require('./middlewares/searchTalker');
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
@@ -25,6 +26,7 @@ app.get('/', (_request, response) => {
 });
 
 app.get('/talker', getTalkers);
+app.get('/talker/search', validateToken, searchTalker);
 app.get('/talker/:id', getTalkerById);
 app.post('/login', validateEmail, validatePassword, login);
 app.post(
