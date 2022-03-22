@@ -13,9 +13,10 @@ const login = require('./middlewares/login');
 const validateEmail = require('./middlewares/validateEmail');
 const validatePassword = require('./middlewares/validatePassword');
 const {
-  validateToken, validateName, validateAge, validadeTalk, existTalkWatchedAt, existTalkRate,
+  validateToken, validateName, validateAge, validateDate, existTalkWatchedAt, existTalkRate,
 } = require('./middlewares/authentication');
 const createTalker = require('./middlewares/createTalker');
+const editTalker = require('./middlewares/editTalker');
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
@@ -27,8 +28,13 @@ app.get('/talker/:id', getTalkerById);
 app.post('/login', validateEmail, validatePassword, login);
 app.post(
   '/talker',
-  validateToken, validateName, validateAge, existTalkWatchedAt, existTalkRate, validadeTalk,
+  validateToken, validateName, validateAge, existTalkWatchedAt, existTalkRate, validateDate,
   createTalker,
+);
+app.put(
+  '/talker/:id',
+  validateToken, validateName, validateAge, existTalkWatchedAt, existTalkRate, validateDate, 
+  editTalker,
 );
 
 app.listen(PORT, () => {
